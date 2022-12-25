@@ -3,8 +3,8 @@ import {IComment, IPost, IUser} from "../models";
 
 const url = "https://gorest.co.in"
 
-type AsyncUsers = Promise<AxiosResponse | null>
-const AsyncUsers = Promise;
+type AsyncResponse = Promise<AxiosResponse | null>
+const AsyncResponse = Promise;
 
 type AsyncPosts = Promise<IPost[] | null>
 const AsyncPosts = Promise;
@@ -15,9 +15,9 @@ const AsyncPost = Promise;
 type AsyncComment = Promise<IComment[] | null>
 const AsyncComment = Promise;
 
-export async function fetchUsers(): AsyncUsers {
+export async function fetchUsers(page: number): AsyncResponse {
     try {
-        const response = await axios.get<IUser[]>(url+"/public/v2/users")
+        const response = await axios.get<IUser[]>(url+`/public/v2/users?page=${page}`)
         return (response)
     }
     catch (e){
@@ -26,10 +26,10 @@ export async function fetchUsers(): AsyncUsers {
         return null
     }
 }
-export async function getPostsByUserId(userId: string): AsyncPosts {
+export async function getPostsByUserId(userId: string, page: number): AsyncResponse {
     try {
-        const response = await axios.get<IPost[]>(url+`/public/v2/users/${userId}/posts`)
-        return (response.data)
+        const response = await axios.get<IPost[]>(url+`/public/v2/users/${userId}/posts?page=${page}`)
+        return (response)
     }
     catch (e){
         const error = e as AxiosError

@@ -9,12 +9,12 @@ class UsersStore{
 
     isLoading = false
     users: IUser[] = []
-    totalCount: string = ''
+    totalCount: string = '' //TODO
 
-    getUsers = async () => {
+    getUsers = async (page:number) => {
         try {
             this.isLoading =true
-            const response = await fetchUsers()
+            const response = await fetchUsers(page)
             if( response === null) return alert("Server error")
             this.users = response.data
             if(response.headers['x-pagination-pages'])
