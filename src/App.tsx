@@ -1,19 +1,33 @@
 import React from 'react';
 import {observer} from "mobx-react";
-import {counterStore} from "./Store/counter.store";
-import UsersList from "./Components/UsersList";
 import Navbar from "./Components/Navbar";
-import {Box} from "@mui/material";
+import {Box, Container} from "@mui/material";
+import {BrowserRouter, Link, Routes} from "react-router-dom";
+import {ROUTES} from "./routes";
+import {Route} from "react-router";
 
 const App = observer(() => {
   return (
-      <div>
+      <BrowserRouter>
           <Box sx={{ display: 'flex' }}>
               <Navbar />
-              <UsersList/>
+              <React.Fragment>
+                  <Container
+                      maxWidth="lg"
+                      sx={{
+                          mt: '90px',
+                      }}
+                  >
+                      <Routes>
+                          {ROUTES.map((rout) => (
+                              <Route key={rout.path} path={rout.path} element={rout.component} />
+                          ))}
+                      </Routes>
+                  </Container >
+              </React.Fragment>
           </Box>
 
-      </div>
+      </BrowserRouter>
   )
 })
 

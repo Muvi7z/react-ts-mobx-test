@@ -1,5 +1,5 @@
 import {
-    AppBar,
+    AppBar, Button,
     CssBaseline,
     Divider,
     Drawer, Icon,
@@ -8,18 +8,19 @@ import {
     ListItemButton, ListItemIcon, ListItemText,
     Toolbar,
 } from "@mui/material";
-import React from "react";
-
-interface Link {
-    path: string,
-    text: string,
-    icons: React.ReactNode
-}
+import React, {useState} from "react";
+import {IMenu} from "../models";
+import UserIcon from "./Icons/UserIcon";
+import {Link} from "react-router-dom";
+import {useNavigate} from "react-router";
 
 const Navbar = () => {
-    const links: Array<Link> = [
+    const links: Array<IMenu> = [
         {path: '/users', text: "Пользователи", icons: <Icon/>},
     ]
+    const [title, setTitle] = useState('')
+    const history = useNavigate()
+    const goBack = () => history(-1)
 
     return (
         <>
@@ -29,6 +30,12 @@ const Navbar = () => {
                 sx={{ width: `calc(100% - 240px)`}}
             >
                 <Toolbar>
+                    <Button
+                        onClick={goBack}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                        Назад
+                    </Button>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -48,14 +55,16 @@ const Navbar = () => {
                 <Divider />
                 <List>
                     {links.map((link) => (
-                        <ListItem key={link.text} disablePadding>
-                            <ListItemButton href={link.path}>
-                                <ListItemIcon>
-                                </ListItemIcon>
-                                <ListItemText primary={link.text} />
-                            </ListItemButton>
-
-                        </ListItem>
+                        <Link key={link.text} style={{textDecoration: "none", color:'black'}} to={link.path} >
+                            <ListItem  disablePadding>
+                                <ListItemButton onClick={() => setTitle(link.text)}>
+                                    <ListItemIcon >
+                                        <UserIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={link.text} />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
                     ))}
                 </List>
                 <Divider />
