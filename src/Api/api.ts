@@ -12,6 +12,9 @@ const AsyncPosts = Promise;
 type AsyncPost = Promise<IPost | null>
 const AsyncPost = Promise;
 
+type AsyncUser = Promise<IUser | null>
+const AsyncUser = Promise;
+
 type AsyncComment = Promise<IComment[] | null>
 const AsyncComment = Promise;
 
@@ -40,6 +43,17 @@ export async function getPostsByUserId(userId: string, page: number): AsyncRespo
 export async function getPostById(id: string): AsyncPost {
     try {
         const response = await axios.get<IPost>(url+`/public/v2/posts/${id}`)
+        return (response.data)
+    }
+    catch (e){
+        const error = e as AxiosError
+        console.log("getPostsByUserId", error)
+        return null
+    }
+}
+export async function getUserById(id: string): AsyncUser {
+    try {
+        const response = await axios.get<IUser>(url+`/public/v2/users/${id}`)
         return (response.data)
     }
     catch (e){

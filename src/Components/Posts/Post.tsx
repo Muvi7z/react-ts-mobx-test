@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import {Box, Button, Divider, Paper, Typography} from "@mui/material";
+import {Box, Button, Paper, Typography} from "@mui/material";
 import {postsStore} from "../../Store/posts.store";
 import {useParams} from "react-router";
-import {IComment, IPost, IUser} from "../../models";
+import {IComment} from "../../models";
 import {observer} from "mobx-react";
 import CommentList from "../Comments/CommentList";
 import {getCommentsByPostId} from "../../Api/api";
@@ -30,7 +30,6 @@ const Post = (props: Props) => {
             console.log(posts.length)
             if(posts.length != 0) getPost(+params.postId)
             else getPostById(params.postId).then()
-
         }
     }, [])
     return (

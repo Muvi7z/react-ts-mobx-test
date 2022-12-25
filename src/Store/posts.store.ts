@@ -21,7 +21,6 @@ class PostsStore{
                 this.posts = response.data
                 if(response.headers['x-pagination-pages'])
                     this.totalCount = response.headers['x-pagination-pages']
-                console.log("Кол-во страниц", this.totalCount)
             }
         }
         catch (e){

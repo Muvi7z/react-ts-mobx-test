@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import {IUser} from "../models";
-import {fetchUsers} from "../Api/api";
+import {fetchUsers, getUserById} from "../Api/api";
 
 class UsersStore{
     constructor() {
@@ -9,6 +9,7 @@ class UsersStore{
 
     isLoading = false
     users: IUser[] = []
+    user: IUser = {id:0, name:'',gender:'',email:'',status:''} //TODO
     totalCount: string = '' //TODO
 
     getUsers = async (page:number) => {
@@ -19,7 +20,6 @@ class UsersStore{
             this.users = response.data
             if(response.headers['x-pagination-pages'])
                 this.totalCount = response.headers['x-pagination-pages']
-            console.log("Кол-во страниц", this.totalCount)
         }
         catch (e){
         }
@@ -28,12 +28,27 @@ class UsersStore{
         }
     }
     getUser(id: number) {
-        console.log("Ищем пользователя",this.users)
-        return this.users?.filter((user) => {
+        this.user= this.users?.filter((user) => {
             console.log(user.id)
             console.log(id)
             return user.id===id
         })[0]
+    }
+    getUserById = async (userId: string) =>{ //TODO
+        try {
+            this.isLoading =true
+
+            if(userId !== undefined) {
+                const response = await getUserById(userId)
+                if (response === null) return alert("Server error 404")
+                this.user = response
+            }
+        }
+        catch (e){
+        }
+        finally {
+            this.isLoading = false
+        }
     }
 }
 

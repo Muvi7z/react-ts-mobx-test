@@ -17,11 +17,12 @@ const UsersList = () => {
 
     const handleChangePage = (selPage: number) => {
         setPage(selPage)
-        getUsers(selPage)
+        getUsers(selPage).then()
     }
 
     useEffect(() => {
-        getUsers(page)
+
+        getUsers(page).then()
     },[])
     return (
         <Box>

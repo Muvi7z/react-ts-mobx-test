@@ -1,13 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import {useParams} from "react-router";
-import {usersStore} from "../../Store/users.store";
-import {postsStore} from "../../Store/posts.store";
+import React, {useEffect} from 'react'
 import {Box, List, Paper, Typography} from "@mui/material";
-import User from "../Users/User";
-import usersList from "../Users/UsersList";
 import {observer} from "mobx-react";
-import {set} from "mobx";
-import {IComment, IUser} from "../../models";
+import {IComment} from "../../models";
 import Comment from "./Comment";
 
 interface Props {
@@ -16,7 +10,6 @@ interface Props {
 }
 
 const CommentList = observer(({comments, isLoading}: Props) => {
-    const params = useParams()
 
     useEffect(() => {
     })

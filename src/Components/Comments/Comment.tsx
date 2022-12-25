@@ -1,15 +1,12 @@
-import {Box, Divider, ListItem, ListItemButton, ListItemText, Typography} from "@mui/material";
+import { Divider, ListItem, ListItemText, Typography} from "@mui/material";
 import React from "react";
-import {useNavigate} from "react-router";
-import {Link} from "react-router-dom";
-import {IComment, IPost} from "../../models";
+import {IComment} from "../../models";
 
 interface Props {
     comment: IComment
 }
 
 const Comment = ({comment}: Props) => {
-    const history = useNavigate()
     return (
         <>
             <ListItem

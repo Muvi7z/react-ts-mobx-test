@@ -1,6 +1,5 @@
-import {Box, Divider, ListItem, ListItemButton, ListItemText, Typography} from "@mui/material";
+import { Divider, ListItemButton, Typography} from "@mui/material";
 import {useNavigate} from "react-router";
-import {Link} from "react-router-dom";
 import {IPost} from "../../models";
 
 interface Props {
