@@ -23,14 +23,14 @@ const PostList = observer(({}: Props) => {
     useEffect(() => {
         if(params.userId !== undefined) {
             getPosts(params.userId, page).then()
-            // if(posts.length != 0) (getUser(posts[0]?.userId))
-            // else getUserById(params.userId).then()
+            //if(posts.length != 0) (getUser(posts[0]?.userId))
+            getUserById(params.userId).then()
         }
     },[])
 
     return (
         <Box>
-            <Typography component="h2" variant="h6" color="primary" gutterBottom>Посты пользователя</Typography>
+            <Typography component="h2" variant="h6" color="primary" gutterBottom>Посты пользователя {user?.name}</Typography>
             {
                 isLoading?
                 <p>Loading...</p>:
